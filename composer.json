@@ -1,0 +1,33 @@
+{
+  "name": "zloynick/joole-reflector",
+  "authors": [
+    {
+      "name": "ZloyNick",
+      "email": "zloynick.dev@gmail.com"
+    }
+  ],
+  "type": "joole-component",
+  "keywords": [
+    "joole",
+    "component",
+    "reflector",
+    "reflections"
+  ],
+  "minimum-stability": "dev",
+  "license": "GPL-3.0+",
+  "version": "2.0.0",
+  "require": {
+    "phpunit/phpunit": "9.5.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "joole\\reflector\\": "src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}
