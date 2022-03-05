@@ -15,7 +15,7 @@
   ],
   "minimum-stability": "dev",
   "license": "GPL-3.0+",
-  "version": "v2.0.1",
+  "version": "v2.1.5",
   "require": {
     "phpunit/phpunit": "9.5.16"
   },
