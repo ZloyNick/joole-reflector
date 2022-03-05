@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-require_once 'vendor/autoload.php';
-require_once 'tests/ExampleClass.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/ReflectedObject2.php';
+require_once __DIR__.'/ExampleClass.php';
 
+use joole\reflector\property\PropertyInterface;
 use PHPUnit\Framework\TestCase;
 use joole\reflector\Reflector;
 
@@ -96,6 +98,33 @@ class ReflectionsTest extends TestCase
         $this->assertEquals('Test string', $reflectedClass->getProperty('privateStringProperty')->getValue());
         $this->assertTrue(!array_diff(['merged', 'array'], $reflectedClass->getProperty('protectedArrayProperty')->getValue()));
         $this->assertEquals(.0987, $reflectedClass->getProperty('publicFloatProperty')->getValue());
+    }
+
+    public function testReflectedObjectClassChange(){
+        $newClass = ReflectedObject2::class;
+
+        try{
+            Reflector::setReflectedObjectClass($newClass);
+        }catch (Exception $exception){
+
+        }
+
+        $this->assertStringContainsString($newClass, Reflector::getReflectedObjectClass());
+    }
+
+    public function testReflectedObjectClassChangeInvalid(){
+        $this->expectException(InvalidArgumentException::class);
+        $newClass = ExampleClass::class;
+        Reflector::setReflectedObjectClass($newClass);
+    }
+
+    public function testVisibility(){
+        $this->assertTrue(
+            $this->object->getProperty('protectedArrayProperty')->getVisibility(false) !== PropertyInterface::T_PRIVATE
+            && $this->object->getProperty('protectedArrayProperty')->getVisibility(false) === PropertyInterface::T_PROTECTED
+        );
+        $this->assertTrue($this->object->getProperty('privateStringProperty')->getVisibility(false) === PropertyInterface::T_PRIVATE);
+        $this->assertTrue($this->object->getProperty('privateStringProperty')->getVisibility() === PropertyInterface::NAME_T_PRIVATE);
     }
 
 }
