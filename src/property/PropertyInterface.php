@@ -11,28 +11,11 @@ interface PropertyInterface
 {
 
     /**
-     * A property visibilities as integer.
-     */
-    public const T_PUBLIC = 0;
-    public const T_PROTECTED = 1;
-    public const T_PRIVATE = 2;
-
-    /**
-     * A property visibilities as string.
-     */
-    public const NAME_T_PUBLIC = 'public';
-    public const NAME_T_PROTECTED = 'protected';
-    public const NAME_T_PRIVATE = 'private';
-
-    /**
-     * Returns property's visibility.
+     * Sets property accessible.
      *
-     * @param bool $asString If contains true, returns visibility as string,
-     * else returns it as int.
-     * @see PropertyInterface::NAME_T_PROTECTED, PropertyInterface::NAME_T_PROTECTED, PropertyInterface::NAME_T_PROTECTED
-     * @see PropertyInterface::T_PROTECTED, PropertyInterface::T_PROTECTED, PropertyInterface::T_PROTECTED
+     * @param true|false $value
      */
-    public function getVisibility(bool $asString = true): string|int;
+    public function setAccessible(bool $value): void;
 
     /**
      * Sets property's value.

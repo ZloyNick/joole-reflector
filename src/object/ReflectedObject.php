@@ -66,29 +66,18 @@ class ReflectedObject implements ReflectedObjectInterface
         return $this->properties[$name] ?? null;
     }
 
-    /**
-     * Returns reflected object's name.
-     *
-     * @return string
-     */
     public function getClassName(): string
     {
         return $this->reflectedObject->getName();
     }
 
-    /**
-     * Initializes properties.
-     *
-     * @return void
-     */
     protected function init(): void
     {
-        $reflectedObject = $this->reflectedObject;
-        $object = $this->object;
+        $object = &$this->reflectedObject;
         $properties = &$this->properties;
 
-        foreach ($reflectedObject->getProperties() as $property){
-            $properties[$property->getName()] = new Property($property, $object);
+        foreach ($object->getProperties() as $property){
+            $properties[$property->getName()] = new Property($property, $this);
         }
     }
 }
